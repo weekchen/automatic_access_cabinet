@@ -1,0 +1,22 @@
+#boxes {
+    height: 100%;
+    width: 100%;
+}
+
+.cabinet{
+    margin-top: 5%;
+    margin-left: 10%;
+    height: 80%;
+    width: 80%;
+    background: #efefef;
+}
+
+.cabinet button{
+    height: 100%;
+    width: 100%;
+    padding: 10%;
+    text-align: center;
+    background: #42fcf2;
+}
+
+

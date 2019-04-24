@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/style/index.css">
+{#    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>#}
+    <title>自动存取柜</title>
+    <script src="../static/js/index.js"></script>
+</head>
+<body style="margin-top:-22px;margin-left: -1px;margin-right: -1px;">
+
+<div id="container">
+
+    <div id="banner" class="banner" >
+        <h1 align="center">自动存取柜</h1>
+    </div>
+
+    <div class="instruction">
+        <h2>使用须知</h2>
+        <p1>自动存取柜使用说明</p1>
+    </div>
+
+    <div id="choose_area">
+        <iframe id="iframe_a" src="welcome.html" name="iframe_a"></iframe>
+        <table class="modes">
+            <tr>
+                <th><button id="in" onclick="go_in()">存货</button></th>
+                <th><button id="welcome" onclick="change_frame()">返回</button></th>
+                <th><button id="out" onclick="go_out()">取货</button></th>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
