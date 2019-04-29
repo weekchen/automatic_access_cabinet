@@ -24,6 +24,13 @@
 - <a href="http://www.w3school.com.cn/js/index.asp" targrt="_blank">JavaScript</a>
 - <a href="https://www.w3cschool.cn/django/" targrt="_blank">Django</a>
 - <a href="http://www.cnblogs.com/linu/articles/8452773.html" targrt="_blank">python之django框架前端与后端的结合</a>
+#### **网页界面**
+###### 首页
+![Alt index](./image/index.PNG "首页界面")
+###### 存货页面 
+![Alt take_in](./image/存货.PNG "存货界面")
+###### 取货页面
+![Alt take_out](./image/取货.PNG "取货界面")
 
 #### **运行报错解决**
 - 

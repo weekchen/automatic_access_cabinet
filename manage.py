@@ -18,4 +18,5 @@ def main():
 
 
 if __name__ == '__main__':
+    # TODO:上位机与下位机进行串口通信
     main()

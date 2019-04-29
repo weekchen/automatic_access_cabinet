@@ -52,7 +52,7 @@ def update_status_out(request):
                 password = var.password
                 if pwd == password:
                     message = "FOUND" + " " + var.name
-                    # TODO:返回 var.name 的坐标给你下位机
+                    # TODO:货物已搜寻到，返回 var.name 的坐标给你下位机
 
                     # 更新数据库
                     Box.objects.filter(name=var.name).update(status='empty', password='null')
@@ -77,7 +77,7 @@ def update_status_in(request):
                 pwd = get_pwd()
                 Box.objects.filter(name=var.name).update(status='occupy', password=pwd)
                 message = "存储成功，你的取件密码为" + " " + pwd
-            #     TODO:返回 var.name 的坐标给你下位机
+            #     TODO:存货口已选择，返回 var.name 的坐标给你下位机
             else:
                 message = "该柜子已占用，请选择其他柜子"
     else:
