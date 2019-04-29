@@ -52,3 +52,18 @@
     text-align: center;
     background: #21fc94;
 }
+
+.footer {
+    height:max-content;
+    margin-bottom: -22px;
+    float: bottom;
+    width: auto;
+    background: #5b80b2;
+    clear: both;
+    text-align: center;
+}
+
+.footer h4{
+    padding: 10px;
+    color: white;
+}

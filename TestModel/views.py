@@ -29,8 +29,10 @@ def take_in(request):
     box_list = Box.objects.all()
     for var in box_list:
         box_name = var.name
-        if var.status == "empty":
+        if var.status == "empty" and box_name != 'box_100':
             boxes[box_name] = "#21fc94"
+        elif box_name == 'box_100':
+            boxes[box_name] = "yellow"
         else:
             boxes[box_name] = "red"
     return render(request, 'take_in.html', context=boxes)
