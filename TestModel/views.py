@@ -3,6 +3,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Box
 import string, random
+from my_serial import MySerial
+
+
+boxes_pos = {
+        'box_100': "100#50", 'box_101': "200#50", 'box_102': "300#50",
+        'box_200': "100#150", 'box_201': "200#150", 'box_202': "300#150",
+        'box_300': "100#250", 'box_301': "200#250", 'box_302': "300#250",
+        'box_400': "100#350", 'box_401': "200#350", 'box_402': "300#350",
+        }
 
 
 def hello(request):
@@ -53,7 +62,15 @@ def update_status_out(request):
                 if pwd == password:
                     message = "FOUND" + " " + var.name
                     # TODO:货物已搜寻到，返回 var.name 的坐标给你下位机
-
+                    my_serial = MySerial("COM4", 9600, None)
+                    my_serial.send_data(boxes_pos[var.name])
+                    msg = ''
+                    while len(msg) < 4:
+                        msg = my_serial.read_data()
+                    my_serial.close_port()
+                    print(msg)
+                    print("取货坐标为" + boxes_pos[var.name])
+                    # message = msg
                     # 更新数据库
                     Box.objects.filter(name=var.name).update(status='empty', password='null')
                     break
@@ -77,7 +94,15 @@ def update_status_in(request):
                 pwd = get_pwd()
                 Box.objects.filter(name=var.name).update(status='occupy', password=pwd)
                 message = "存储成功，你的取件密码为" + " " + pwd
-            #     TODO:存货口已选择，返回 var.name 的坐标给你下位机
+                #     TODO:存货口已选择，返回 var.name 的坐标给你下位机
+                my_serial = MySerial("COM4", 9600, None)
+                print("存货坐标为" + boxes_pos[var.name])
+                my_serial.send_data(boxes_pos[var.name])
+                msg = ''
+                while len(msg) < 4:
+                    msg = my_serial.read_data()
+                print(msg)
+                my_serial.close_port()
             else:
                 message = "该柜子已占用，请选择其他柜子"
     else:
