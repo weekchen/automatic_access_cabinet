@@ -7,10 +7,17 @@ from my_serial import MySerial
 
 
 boxes_pos = {
-        'box_100': "100#50", 'box_101': "200#50", 'box_102': "300#50",
-        'box_200': "100#150", 'box_201': "200#150", 'box_202': "300#150",
-        'box_300': "100#250", 'box_301': "200#250", 'box_302': "300#250",
-        'box_400': "100#350", 'box_401': "200#350", 'box_402': "300#350",
+        'box_100': "00#00", 'box_101': "125#0", 'box_102': "255#0",
+        'box_200': "0#100", 'box_201': "125#100", 'box_202': "255#100",
+        'box_300': "0#200", 'box_301': "125#200", 'box_302': "255#200",
+        'box_400': "0#300", 'box_401': "125#300", 'box_402': "255#300",
+        }
+
+boxes_pos2 = {
+        'box_100': "0o0", 'box_101': "125o0", 'box_102': "255o0",
+        'box_200': "0o100", 'box_201': "125o100", 'box_202': "255o100",
+        'box_300': "0o200", 'box_301': "125o200", 'box_302': "255o200",
+        'box_400': "0o300", 'box_401': "125o300", 'box_402': "255o300",
         }
 
 
@@ -62,14 +69,15 @@ def update_status_out(request):
                 if pwd == password:
                     message = "FOUND" + " " + var.name
                     # TODO:货物已搜寻到，返回 var.name 的坐标给你下位机
-                    my_serial = MySerial("COM4", 9600, None)
-                    my_serial.send_data(boxes_pos[var.name])
-                    msg = ''
-                    while len(msg) < 4:
-                        msg = my_serial.read_data()
+                    my_serial = MySerial("COM3", 9600, None)
+                    my_serial.send_data(boxes_pos2[var.name]+"\r\n")
+                    # my_serial.send_data("0#100\r\n")
+                    # msg = ''
+                    # while len(msg) < 4:
+                    #     msg = my_serial.read_data()
                     my_serial.close_port()
-                    print(msg)
-                    print("取货坐标为" + boxes_pos[var.name])
+                    # print(msg)
+                    print("取货坐标为" + boxes_pos2[var.name])
                     # message = msg
                     # 更新数据库
                     Box.objects.filter(name=var.name).update(status='empty', password='null')
@@ -95,13 +103,16 @@ def update_status_in(request):
                 Box.objects.filter(name=var.name).update(status='occupy', password=pwd)
                 message = "存储成功，你的取件密码为" + " " + pwd
                 #     TODO:存货口已选择，返回 var.name 的坐标给你下位机
-                my_serial = MySerial("COM4", 9600, None)
+                my_serial = MySerial("COM3", 9600, None)
                 print("存货坐标为" + boxes_pos[var.name])
-                my_serial.send_data(boxes_pos[var.name])
+                my_serial.send_data(boxes_pos[var.name]+"\r\n")
+                # my_serial.send_data("0o100\r\n")
+                # my_serial.send_data("\r\n")
+                # my_serial.send_data("0#100")
                 msg = ''
-                while len(msg) < 4:
-                    msg = my_serial.read_data()
-                print(msg)
+                # while len(msg) < 4:
+                #     msg = my_serial.read_data()
+                # print(msg)
                 my_serial.close_port()
             else:
                 message = "该柜子已占用，请选择其他柜子"
